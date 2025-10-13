@@ -1,47 +1,39 @@
-﻿// Lab_03_2.cpp
+// Lab_03_2.cpp
 // Татарський Василь Петрович
 // Лабораторна робота №3.2
 // Розгалуження, задане формулою: функція з параметрами
-// Варіант 22
+// Варіант 28
 
 #include <iostream>
+#include <cmath>
+#include <iomanip>
 #include <Windows.h>
+
 using namespace std;
 
 int main()
 {
-	SetConsoleCP(1251);
-	SetConsoleOutputCP(1251);
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
 
-    double a, b, c, x;  // вхідні дані
-    double F;           // результат
+    double x, a, c, F;
 
-    cout << "a = "; cin >> a;
-    cout << "b = "; cin >> b;
-    cout << "c = "; cin >> c;
-    cout << "x = "; cin >> x;
+    cout << "Введіть значення x: ";
+    cin >> x;
+    cout << "Введіть значення a: ";
+    cin >> a;
+    cout << "Введіть значення c: ";
+    cin >> c;
 
-    // --- Спосіб 1: розгалуження у скороченій формі ---
-    if (x + 5 < 0 && c == 0)
-        F = (1 / (a * x)) - b;
-
-    if (x + 5 > 0 && c != 0)
-        F = (x - a) / x;
-
-    if (!((x + 5 < 0 && c == 0) || (x + 5 > 0 && c != 0)))
-        F = (10 * x) / (c - 4);
-
-    cout << "\n1) F = " << F << endl;
-
-    // --- Спосіб 2: розгалуження у повній формі ---
-    if (x + 5 < 0 && c == 0)
-        F = (1 / (a * x)) - b;
-    else if (x + 5 > 0 && c != 0)
-        F = (x - a) / x;
+    if (c < 0 && a != 0)
+        F = -a * pow(x, 2);
+    else if (c > 0 && a == 0)
+        F = (a - x) / (c * x);
     else
-        F = (10 * x) / (c - 4);
+        F = x / c;
 
-    cout << "2) F = " << F << endl;
+    cout << fixed << setprecision(3);
+    cout << "F = " << F << endl;
 
     return 0;
-}
+} 
