@@ -6,25 +6,50 @@
 
 #include <iostream>
 #include <cmath>
-#include <iomanip>
 #include <Windows.h>
-
 using namespace std;
 
-int main()
-{
+// ----------------------------------------------------
+// ВАРІАНТ 28
+// Формула:
+// F = -a*x^2, якщо c<0 і a≠0
+// F = (a - x)/(c*x), якщо c>0 і a=0
+// F = x/c, в інших випадках
+// ----------------------------------------------------
+
+int main() {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    double x, a, c, F;
+    double a, c, x, F;
 
-    cout << "Введіть значення x: ";
-    cin >> x;
-    cout << "Введіть значення a: ";
-    cin >> a;
-    cout << "Введіть значення c: ";
-    cin >> c;
+    cout << "Введіть a, c, x: ";
+    cin >> a >> c >> x;
 
+    cout << "=== ПОВНИЙ ВАРІАНТ ===" << endl;
+
+    // --- Повний (розгорнутий) варіант ---
+    if (c < 0) {
+        if (a != 0)
+            F = -a * pow(x, 2);
+        else
+            F = x / c;
+    }
+    else if (c > 0) {
+        if (a == 0)
+            F = (a - x) / (c * x);
+        else
+            F = x / c;
+    }
+    else {
+        F = x / c; // в інших випадках
+    }
+
+    cout << "F (повний варіант) = " << F << endl;
+
+    cout << endl << "=== СКОРОЧЕНИЙ ВАРІАНТ ===" << endl;
+
+    // --- Скорочений варіант ---
     if (c < 0 && a != 0)
         F = -a * pow(x, 2);
     else if (c > 0 && a == 0)
@@ -32,8 +57,7 @@ int main()
     else
         F = x / c;
 
-    cout << fixed << setprecision(3);
-    cout << "F = " << F << endl;
+    cout << "F (скорочений варіант) = " << F << endl;
 
     return 0;
-} 
+}
