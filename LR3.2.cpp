@@ -6,7 +6,6 @@
 
 #include <iostream>
 #include <cmath>
-#include <iomanip>
 #include <Windows.h>
 using namespace std;
 
@@ -15,29 +14,37 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    double x, a, c, F1, F2;
+    double a;  // вхідний параметр
+    double c;  // вхідний параметр
+    double x;  // вхідний аргумент
+    double F;  // результат обчислення
+    cout << "a = "; cin >> a;
+    cout << "c = "; cin >> c;
+    cout << "x = "; cin >> x;
 
-    cout << "Введіть значення x: ";
-    cin >> x;
-    cout << "Введіть значення a: ";
-    cin >> a;
-    cout << "Введіть значення c: ";
-    cin >> c;
+    cout << endl;
 
-    //"Повна" форма — через логічні вирази
-    F1 = (-a * pow(x, 2)) * (c < 0 && a != 0)
-        + ((a - x) / (c * x)) * (c > 0 && a == 0)
-        + (x / c) * !((c < 0 && a != 0) || (c > 0 && a == 0));
+    // спосіб 1: розгалуження в скороченій формі
+    if (c < 0 && a != 0)
+        F = -a * pow(x, 2);
+    if (c > 0 && a == 0)
+        F = (a - x) / (c * x);
+    if (!(c < 0 && a != 0) && !(c > 0 && a == 0))
+        F = x / c;
 
-    //"Скорочена" форма — через тернарний оператор
-    F2 = (c < 0 && a != 0) ? -a * pow(x, 2) :
-          (c > 0 && a == 0) ? (a - x) / (c * x) :
-                              x / c;
+    cout << "1) F = " << F << endl;
 
-    cout << fixed << setprecision(3);
-    cout << "\nРезультати обчислення:\n";
-    cout << "1) Повна форма (через логіку):   F = " << F1 << endl;
-    cout << "2) Скорочена форма (тернарна):   F = " << F2 << endl;
+    // спосіб 2: розгалуження в повній формі
+    if (c < 0 && a != 0)
+        F = -a * pow(x, 2);
+    else
+        if (c > 0 && a == 0)
+            F = (a - x) / (c * x);
+        else
+            F = x / c;
 
+    cout << "2) F = " << F << endl;
+
+    cin.get();
     return 0;
 }
