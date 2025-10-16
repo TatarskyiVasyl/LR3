@@ -1,3 +1,9 @@
+// Lab_03_3.cpp
+// Татарський Василь Петрович
+// Лабораторна робота №3.3
+// Розгалуження, задане графіком функції
+// Варіант 28
+
 #include <iostream>
 #include <cmath>
 #include <Windows.h>
@@ -5,33 +11,30 @@ using namespace std;
 
 int main()
 {
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
 
-    double R, x, y;
-    cout << "R = "; cin >> R;
-    cout << "x = "; cin >> x;
+    double x, y, R;
 
+    cout << "Введіть x, R: ";
+    cin >> x >> R;
+
+    // Розгалуження у повній формі
     if (x <= -8 - R)
-        // горизонтальна лінія зліва
         y = 0;
-    else if (x > -8 - R && x <= -8 + R)
-        // верхня півокруга з центром у (-8, 0)
-        y = sqrt(R * R - pow(x + 8, 2));
-    else if (x > -8 + R && x <= 0)
-        // пряма лінія, що з'єднує (-8+R, -R) і (0, 2)
-        y = ((2 - (-R)) / (0 - (-8 + R))) * (x - (-8 + R)) + (-R);
-    else if (x > 0 && x <= 2)
-        // лінія від (0,0) до (2,2)
-        y = x;
-    else if (x > 2 && x <= 6)
-        // відрізок на осі X
-        y = 0;
-    else if (x > 6 && x <= 8)
-        // парабола y = (x - 6)^2
-        y = pow(x - 6, 2);
+    else 
+        if (-8 - R < x && x <= -8 + R)
+        y = -R + sqrt(R*R - (x + 8)*(x + 8));   // півколо
+    else 
+            if (-8 + R < x && x <= 2)
+        y = 1.0 * x + 2;                            // пряма, через (0;2)
+    else 
+                if (2 < x && x < 6)
+        y = 0;                                      // проміжок по осі X
+    else 
+                    if (6 <= x && x <= 8)
+        y = (x - 6)*(x - 6);                          // парабола
     else
-        // за межами графіка
         y = 0;
 
     cout << "y = " << y << endl;
